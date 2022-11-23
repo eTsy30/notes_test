@@ -3,36 +3,19 @@ import data from '../data.json'
 export const NoteContext = createContext()
 
 export const Context = (props) => {
-    const [noteData, setNoteData] = useState(data)
-    const [tag, setTag] = useState(null)
+    const [noteData, setNoteData] = useState(null)
+    const [selectedTag, setTag] = useState(null)
     useEffect(() => {
-        // setNoteData(data)
         filterTag(data)
     }, [])
-
-    const filtrNotes = (tag) => {
-        console.log(tag, 'tag')
-        const nqew = noteData.filter((el) => {
-            return el.tag.includes(`${tag}`)
-        })
-        if (tag) {
-            setNoteData(nqew)
-            console.log(nqew, 'filtr')
-        } else {
-            setNoteData(data)
-            console.log(data, 'temp')
-        }
-    }
-
     const filterTag = (noteData) => {
-        const x = noteData.map((noteData) => {
-            return noteData.text.split(' ').filter((leter) => {
-                return leter[0] === '#'
-            })
-        })
+        const listTag = noteData.map((node) =>
+            node.text.split(' ').filter((leter) => leter[0] === '#')
+        )
+
         const temp = [...noteData]
         temp.forEach((el, index) => {
-            el.tag = x[index]
+            el.tag = listTag[index]
         })
         setNoteData(temp)
     }
@@ -73,10 +56,9 @@ export const Context = (props) => {
         addNotes,
         delNotes,
         editNotes,
-        filtrNotes,
         filterTag,
         setTag,
-        tag,
+        selectedTag,
     }
     return (
         <NoteContext.Provider value={value}>

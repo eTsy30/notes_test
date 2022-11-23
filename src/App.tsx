@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import './App.css'
 import { Note } from './components/Note/Note'
 import { Panel } from './components/Panel/Panel'
@@ -11,45 +11,44 @@ type noteProp = {
     ind: string
 }
 function App() {
-    const { noteData, filtrNotes, tag } = useContext(NoteContext)
-    const [isTag, setTag] = useState('')
+    const { noteData, selectedTag, setTag } = useContext(NoteContext)
     const onButtonClick = (tag: string) => {
-        filtrNotes(tag)
         setTag(tag)
     }
-    console.log(noteData)
+    const clearSelectedTag = () => {
+        setTag(null)
+    }
+    if (!noteData) return null
 
     return (
         <div className="App">
             <Panel />
             <div className="btnfilter_wrapper">
-                {isTag && (
-                    <button
-                        className="btnfilter"
-                        onClick={() => onButtonClick('')}
-                    >
-                        <span className="tag">{isTag}</span>
+                {selectedTag && (
+                    <button className="btnfilter" onClick={clearSelectedTag}>
+                        <span className="tag">{selectedTag[0]}</span>
                         <span className="close">Close</span>
                     </button>
                 )}
             </div>
             <div className="note_wrapper">
-                {noteData &
-                    noteData
-                        // .filter(
-                        //     (el: any) => tag !== null && !el.tag.includes(tag)
-                        // )
-                        .map((note: noteProp, index: string) => {
-                            return (
-                                <Note
-                                    key={note.id}
-                                    onButtonClick={onButtonClick}
-                                    {...note}
-                                    ind={index}
-                                />
-                            )
-                            //
-                        })}
+                {noteData
+                    .filter((el: any) => {
+                        if (selectedTag) {
+                            return el.tag.includes(selectedTag[0])
+                        }
+                        return true
+                    })
+                    .map((note: any, index: string) => {
+                        return (
+                            <Note
+                                key={note.id}
+                                onButtonClick={onButtonClick}
+                                {...note}
+                                ind={index}
+                            />
+                        )
+                    })}
             </div>
         </div>
     )

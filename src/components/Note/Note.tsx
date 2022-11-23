@@ -3,20 +3,21 @@ import './Note.scss'
 
 import { MdDeleteForever, MdEdit, MdAddCircle } from 'react-icons/md'
 import { NoteContext } from '../Context/Context'
+import { v4 as uuidv4 } from 'uuid'
 type noteProp = {
     title: string
     text: string
     tag?: Array<string>
     id: string
     ind: string
-    onButtonClick: any
 }
 export const Note = (note: noteProp) => {
     const [isEdit, setEdit] = useState(true)
     const { delNotes, editNotes, setTag } = useContext(NoteContext)
-    const { title, text, id, tag, onButtonClick } = note
+    const { title, text, id, tag } = note
     const [titleNew, setTitle] = useState(title)
     const [textNew, setText] = useState(text)
+
     const handleClick = () => {
         setTag(tag)
     }
@@ -55,10 +56,16 @@ export const Note = (note: noteProp) => {
                 <hr />
                 <div className="wrapper_tag">
                     {tag?.map((tag: string) => {
-                        return <button onClick={handleClick}>{tag}</button>
+                        return (
+                            <button
+                                key={uuidv4()}
+                                className="tagButton"
+                                onClick={handleClick}
+                            >
+                                {tag}
+                            </button>
+                        )
                     })}
-
-                    {}
                 </div>
             </div>
             <div className="wrapper_btn">
