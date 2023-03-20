@@ -28,18 +28,23 @@
   border: none;
   height: 15px;
   background: transparent;
+  margin-bottom: 10px;
 }
 
+
+
 .btnfilter .close {
-  display: none;
+  display: flex;
 }
 
 .btnfilter:hover .tag {
   display: none;
+
 }
 
 .btnfilter:hover .close {
   display: inline;
+
 }
 
 .note_wrapper {

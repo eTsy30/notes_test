@@ -4,13 +4,10 @@ import './Note.scss'
 import { MdDeleteForever, MdEdit, MdAddCircle } from 'react-icons/md'
 import { NoteContext } from '../Context/Context'
 import { v4 as uuidv4 } from 'uuid'
-type noteProp = {
-    title: string
-    text: string
-    tag?: Array<string>
-    id: string
-    ind: string
-}
+import { noteProp } from '../../interfaces/note'
+
+
+
 export const Note = (note: noteProp) => {
     const [isEdit, setEdit] = useState(true)
     const { delNotes, editNotes, setTag } = useContext(NoteContext)
@@ -24,11 +21,10 @@ export const Note = (note: noteProp) => {
     const ChangesTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
     }
-    const ChangesTextArea = (event: {
-        target: { value: React.SetStateAction<string> }
-    }) => {
-        setText(event.target.value)
+    const ChangesTextArea = (e: React.FormEvent<HTMLDivElement>)  => {
+         setText(String(e.currentTarget.textContent))
     }
+
 
     return (
         <div className="wrapper">
@@ -45,13 +41,13 @@ export const Note = (note: noteProp) => {
             </div>
             <div className="wrapper_text">
                 {isEdit ? (
-                    <p className="text">{text}</p>
+                    <div    dangerouslySetInnerHTML={{__html: text}} className="text"></div>
                 ) : (
-                    <textarea
-                        value={textNew}
-                        className="textArea_edit"
-                        onChange={ChangesTextArea}
-                    />
+                    <div 
+                    className="inputDiv"  
+                    dangerouslySetInnerHTML={{__html:  textNew}} 
+                    contentEditable="true" 
+                    onBlur={(e)=>ChangesTextArea(e)} />
                 )}
                 <hr />
                 <div className="wrapper_tag">
@@ -68,6 +64,7 @@ export const Note = (note: noteProp) => {
                     })}
                 </div>
             </div>
+         
             <div className="wrapper_btn">
                 {isEdit ? (
                     <button className="btn" onClick={() => setEdit(!isEdit)}>

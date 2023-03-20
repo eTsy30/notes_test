@@ -23,9 +23,10 @@
 }
 .textArea_edit {
     width: 90%;
-    min-height: 100%;
+    min-height: 300px;
     border: 1px solid #000;
-    margin: 15px;
+    margin: 0px 15px 15px;
+    resize: none;
 }
 .name_Note_edit {
     border-radius: 15px;
@@ -34,8 +35,8 @@
 .wrapper_text {
     display: flex;
     justify-self: start;
-    justify-content: center;
     flex-direction: column;
+    flex: 1 0 auto;
 }
 .wrapper_text > p {
     float: left;
@@ -46,8 +47,10 @@
 
 .wrapper_btn {
     display: flex;
-    flex: 1;
+    flex: auto;
     justify-content: flex-end;
+    flex: 0 0 auto;
+
 
     & > .btn {
         border-radius: 15px;
@@ -69,7 +72,20 @@
         height: 4em;
         color: #ce5a57;
     }
+
 }
 .tagButton {
+    background-color: blanchedalmond;
+    font-weight: 900;
+    border: none;
     margin: 5px;
+    padding: 5px;
+    border-radius: 25px;
+}
+.tagButton:hover{
+    transform: scale(1.2);
+}
+.colorTag{
+   color: #ce5a57;
+   background: #000;
 }

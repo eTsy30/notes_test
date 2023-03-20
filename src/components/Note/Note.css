@@ -1,0 +1,81 @@
+.wrapper {
+  display: flex;
+  border: 2px solid #444c5c;
+  width: 300px;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 15px;
+  padding: 15px;
+  gap: 15px;
+}
+.wrapper.name_Note {
+  display: inline;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.wrapper_name {
+  display: flex;
+  justify-content: center;
+}
+
+.text {
+  margin: 15px;
+}
+
+.textArea_edit {
+  width: 90%;
+  min-height: 100%;
+  border: 1px solid #000;
+  margin: 15px;
+}
+
+.name_Note_edit {
+  border-radius: 15px;
+  border: 1px solid #000;
+}
+
+.wrapper_text {
+  display: flex;
+  justify-self: start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.wrapper_text > p {
+  float: left;
+}
+
+.wrapper_tag > span {
+  margin: 5px;
+}
+
+.wrapper_btn {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+.wrapper_btn > .btn {
+  border-radius: 15px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: 5px;
+  border: none;
+}
+.wrapper_btn .btn-add {
+  width: 30px;
+  height: 4em;
+  color: #78a5a3;
+}
+.wrapper_btn .btn-del {
+  width: 30px;
+  height: 4em;
+  color: #ce5a57;
+}
+
+.tagButton {
+  margin: 5px;
+}/*# sourceMappingURL=Note.css.map */

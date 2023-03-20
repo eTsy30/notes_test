@@ -1,5 +1,9 @@
+
 import { createContext, useState, useEffect } from 'react'
 import data from '../data.json'
+import '../Note/Note.scss'
+import {getTags} from '../../utils/getTags'
+import{tagSelect} from '../../utils/tagSelect'
 export const NoteContext = createContext()
 
 export const Context = (props) => {
@@ -7,26 +11,33 @@ export const Context = (props) => {
     const [selectedTag, setTag] = useState(null)
     useEffect(() => {
         filterTag(data)
+  
+        
     }, [])
+ 
     const filterTag = (noteData) => {
-        const listTag = noteData.map((node) =>
-            node.text.split(' ').filter((leter) => leter[0] === '#')
-        )
-
+        const listTag = getTags(noteData)
         const temp = [...noteData]
+        
         temp.forEach((el, index) => {
             el.tag = listTag[index]
+            el.text= tagSelect(el.tag,el.text)
+           
         })
+      
         setNoteData(temp)
+        
+           
     }
 
     const addNotes = (note) => {
-        const tag = note.text.split(' ').filter((leter) => {
-            return leter[0] === '#'
-        })
-        note.tag = tag
+        const tags =getTags(note)
+
+        note.tag = tags
+        note.text=tagSelect(tags,note.text)
         setNoteData([...noteData, note])
     }
+
 
     const editNotes = (id, titleNew, textNew, index) => {
         const tag = textNew.split(' ').filter((leter) => {
@@ -36,9 +47,10 @@ export const Context = (props) => {
         const newNote = {
             id: id,
             title: titleNew,
-            text: textNew,
+            text: tagSelect(tag, textNew),
             tag: tag,
         }
+        
         const temp = [...noteData]
         temp.splice(index, 1, newNote)
         setNoteData(temp)
