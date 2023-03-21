@@ -17,7 +17,22 @@
     display: flex;
     margin: 5px;
     border: none;
-    .btn-add {
+    .btn-add {  animation-duration: 2s;
+        animation-name: visible;
+        @keyframes visible {
+            from {
+                width: 20px;
+                height: 20px;
+                color: #ffffff;
+            }
+          
+            to {
+                width: 40px;
+                height: 40px;
+                color: #78a5a3;
+            }
+          }
+        
         width: 40px;
         height: 40px;
         color: #78a5a3;
@@ -25,6 +40,32 @@
     .btn-add:hover{
         transform: scale(1.2);
     }
+    
+}
+.btn-add-disabled {display: inline;
+    animation-duration: 2s;
+    animation-name: visibleDisable;
+    @keyframes visibleDisable {
+        from {
+            width: 0px;
+            height: 0px;
+            color: #ffffff;
+            
+        }
+      
+        to {
+            width: 50px;
+            height: 50px;
+            color: #7b7b7b;
+            transform: rotate(-45deg)
+        }
+      }
+      width: 50px;
+      height: 50px;
+      color: #7b7b7b;
+      transform: rotate(-45deg)
+       
+
 }
 input {
     padding: 15px;

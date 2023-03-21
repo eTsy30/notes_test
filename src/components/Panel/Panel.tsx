@@ -36,10 +36,10 @@ export const Panel = () => {
                 placeholder="Add your note"
                 onChange={ChangesText}
                 value={text}
-            />
-            <button onClick={addNewNote} className="btn-Panel">
-                <MdAddCircle className="btn-add" />
-            </button>
+            /> {title&&text?<button  onClick={addNewNote} className="btn-Panel">
+            <MdAddCircle className="btn-add" />
+        </button>: <MdAddCircle className="btn-add-disabled" />}
+            
         </div>
     )
 }

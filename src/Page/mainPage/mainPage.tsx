@@ -1,17 +1,20 @@
 import { useContext } from 'react'
-import './App.css'
-import { Note } from './components/Note/Note'
-import { Panel } from './components/Panel/Panel'
-import { NoteContext } from './components/Context/Context'
+import './mainPageStyle.css'
+
 import { AiOutlineClear } from "react-icons/ai";
-type noteProp = {
+import { Note } from 'components/Note/Note';
+import { Panel } from 'components/Panel/Panel';
+import { NoteContext } from 'components/Context/Context';
+
+export type noteProp = {
     title: string
     text: string
-    tag?: Array<string>
+    tag?: string[]
     id: string
     ind: string
+    onButtonClick?:(args:string)=>void
 }
-function App() {
+function MainPage() {
     const { noteData, selectedTag, setTag } = useContext(NoteContext)
     const onButtonClick = (tag: string) => {
         setTag(tag)
@@ -34,16 +37,14 @@ function App() {
             </div>
             <div className="note_wrapper">
                 {noteData
-                    .filter((el:noteProp) => {
-                        console.log(el);
-                        
+                    .filter((el: { tag: string | any[] }) => { 
                         if (selectedTag) {
                             return el.tag.includes(selectedTag[0])
                         }
                         return true
                     })
-                    .map((note: any, index: string) => {
-                        console.log(note);
+                    .map((note: JSX.IntrinsicAttributes & noteProp, index: string) => {
+                
                         
                         return (
                             <Note
@@ -60,4 +61,4 @@ function App() {
     )
 }
 
-export default App
+export default MainPage

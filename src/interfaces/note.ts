@@ -1,8 +1,8 @@
  export type noteProp = {
     title: string
     text: string
-    tag?: string[]|any
+    tag?: string[]
     id: string
     ind: string
-    onButtonClick:()=>void
+
 }
